@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../static/plugins/jQuery/jquery-2.1.4.min.js" th:src="@{/plugins/jQuery/jquery-2.1.4.min.js}"></script>
+    <style type="text/css">
+        table {
+            border: 1px solid
+        }
+        tr:hover{
+            background-color: #abcdef;
+        }
+        td {
+            border: 1px solid
+        }
+    </style>
+</head>
+<body>
+    <h3>Choose directory...</h3>
+    <input id="fileInput" type="file" webkitdirectory>
+    <button id="b" onclick="getDirectory()">OK</button>
+
+    <br>
+    <div>
+        <div id="grid">
+        </div>
+    </div>
+</body>
+<script th:src="@{/plugins/artTemplate/template.js}"></script>
+<script th:src="@{/noDuplicate/noDuplicate.js}"></script>
+
+<script id="grid_template" type="text/html">
+    <table style="">
+        {{each list as value i}}
+        <tr>
+            <td>{{value.PID}}</td>
+            <td>{{value.FILE_NAME}}</td>
+            <td style='color:rgb({{value.r}},{{value.g}},{{value.b}})'>{{value.FILE_MD5}}</td>
+            <td>{{value.FILE_PATH}}</td>
+            <td><button onclick="deleteItem('{{value.PID}}','{{value.FILE_PATH}}')">删除</button></td>
+        </tr>
+        {{/each}}
+    </table>
+</script>
+</html>
